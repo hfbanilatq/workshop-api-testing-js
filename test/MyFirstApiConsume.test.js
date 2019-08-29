@@ -6,12 +6,14 @@ const chai = require('chai');
 const expect = chai.expect;
 
 describe('first api test', () =>{
+
     it('Consume GET Service', async () => {
         const response = await agent.get('https://httpbin.org/ip');
       
         expect(response.status).to.equal(statusCode.OK);
         expect(response.body).to.have.property('origin');
       });
+
     it('Consume GET Service with query parameters', async() => {
         const query = {
             name: 'Jhon',
@@ -23,6 +25,7 @@ describe('first api test', () =>{
         expect(response.status).to.equal(statusCode.OK);
         expect(response.body.args).to.eql(query);
     });
+
     it('Consume HEAD service', async () =>{
         const query = {
             name: 'Jhon',
@@ -40,19 +43,20 @@ describe('first api test', () =>{
         expect(response.header['content-length']).to.equal('49');
         expect(serverDate.getDate()).to.equal(todayDate.getDate());
         expect(response.body).to.eql({});
-    })
+    });
+
     it('Consume PATCH service ', async () =>{
       const query = {
             name: 'Jhon',
-            age: '31',
-            city: 'New York'
+            age: '31'
       }
       const response= await agent.patch('https://httpbin.org/patch').send(query);
 
       expect(response.status).to.equal(statusCode.OK);
       expect(response.body.json).to.eql(query);
       expect(response.body.files).to.eql({});
-    })
+    });
+
     it('Consume DELETE service ', async () => {
         const query= {
             name:'Hector',
@@ -65,7 +69,8 @@ describe('first api test', () =>{
 
         expect(response.status).to.equal(statusCode.OK);
         expect(response.body.json).to.eql(query);
-    })
+    });
+
     describe('Consume POST service', async () => {
         const query ={
             name: 'Hector',
@@ -73,12 +78,12 @@ describe('first api test', () =>{
             city: 'Medellin'
         }
         const response= await agent
-            .post('https://httpbin.org/delete')
+            .post('https://httpbin.org/post')
             .send(query);
         
         expect(response.status).to.equal(statusCode.OK);
         expect(response.body.json).to.eql(query);
-    })
+    });
 
     describe('Consume PUT service ', async () => {
         const query = {
@@ -91,5 +96,5 @@ describe('first api test', () =>{
             .send(query);
         expect(response.status).to.equal(statusCode.OK);
         expect(response.body.json).to.eql(query);
-    })
+    });
 });
