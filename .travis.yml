@@ -1,0 +1,9 @@
+language: nade_js
+cache:
+directories:
+- node_modules
+notifications:
+email: false
+branches:
+except:
+- "/^v\\d+\\.\\d+\\.\\d+$/"
