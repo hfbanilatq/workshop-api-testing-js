@@ -1,4 +1,3 @@
-
 const agent = require('superagent');
 const statusCode = require('http-status-codes');
 const chai = require('chai');
@@ -70,7 +69,7 @@ describe('first api test', () => {
     expect(response.body.json).to.eql(query);
   });
 
-  describe('Consume POST service', async () => {
+  it('Consume POST service', async () => {
     const query = {
       name: 'Hector',
       age: 21,
@@ -84,7 +83,7 @@ describe('first api test', () => {
     expect(response.body.json).to.eql(query);
   });
 
-  describe('Consume PUT service ', async () => {
+  it('Consume PUT service ', async () => {
     const query = {
       name: 'Jhonatan',
       age: 24,
