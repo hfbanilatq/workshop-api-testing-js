@@ -32,5 +32,8 @@
     "mochawesome": "^4.1.0",
     "superagent": "^5.1.0",
     "superagent-promise": "^1.1.0"
+  },
+  "dependencies": {
+    "travis-cli": "^1.0.9"
   }
 }
