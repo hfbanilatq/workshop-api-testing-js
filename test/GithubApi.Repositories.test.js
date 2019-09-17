@@ -12,7 +12,8 @@ describe('Github api test repositories', () => {
 
     before(async () => {
       const userResponse = await agent.get(`${urlBase}/users/${userName}`)
-        .set('User-Agent', 'agent');
+        .set('User-Agent', 'agent')
+        .auth('token', process.env.ACCESS_TOKEN);
       user = userResponse.body;
     });
 
@@ -29,7 +30,8 @@ describe('Github api test repositories', () => {
 
       before(async () => {
         const repositoriesResponse = await agent.get(user.repos_url)
-          .set('User-Agent', 'agent');
+          .set('User-Agent', 'agent')
+          .auth('token', process.env.ACCESS_TOKEN);
 
         repositories = repositoriesResponse.body;
         repository = repositories.find((repo) => repo.name === repositoryNeeded);
@@ -50,6 +52,7 @@ describe('Github api test repositories', () => {
         before(async () => {
           const downloadRespose = await agent.get(`${repository.svn_url}/archive/${repository.default_branch}.zip`)
             .set('User-Agent', 'agent')
+            .auth('token', process.env.ACCESS_TOKEN)
             .buffer(true);
 
           zipArchive = downloadRespose.text;
@@ -70,7 +73,8 @@ describe('Github api test repositories', () => {
 
           before(async () => {
             const fileResponse = await agent.get(`${repository.url}/contents`)
-              .set('User-Agent', 'agent');
+              .set('User-Agent', 'agent')
+              .auth('token', process.env.ACCESS_TOKEN);
 
             filesList = fileResponse.body;
             readme = filesList.find((file) => file.name === 'README.md');
@@ -88,6 +92,7 @@ describe('Github api test repositories', () => {
             before(async () => {
               const readmeDownloadRespose = await agent.get(readme.download_url)
                 .set('User-Agent', 'agent')
+                .auth('token', process.env.ACCESS_TOKEN)
                 .buffer(true);
 
               fileContent = readmeDownloadRespose.text;
