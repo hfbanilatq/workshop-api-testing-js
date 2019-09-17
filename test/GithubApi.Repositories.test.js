@@ -45,7 +45,7 @@ describe('Github api test repositories', () => {
 
       describe('when donwload default branch', () => {
         let zipArchive;
-        const expectedMd5 = 'cb1d5ff786ef7e075c8cd67018ba7a74';
+        const expectedDownloadMd5 = 'cb1d5ff786ef7e075c8cd67018ba7a74';
 
         before(async () => {
           const downloadRespose = await agent.get(`${repository.svn_url}/archive/${repository.default_branch}.zip`)
@@ -56,7 +56,7 @@ describe('Github api test repositories', () => {
         });
 
         it('then the file has been downloaded', () => {
-          expect(md5(zipArchive)).to.equal(expectedMd5);
+          expect(md5(zipArchive)).to.equal(expectedDownloadMd5);
         });
 
         describe('When get repository file list', () => {
