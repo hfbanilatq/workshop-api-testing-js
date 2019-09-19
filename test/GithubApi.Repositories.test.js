@@ -58,7 +58,7 @@ describe('Github api test repositories', () => {
           zipArchive = downloadRespose.text;
         });
 
-        it('Then I should download the default branch', () => {
+        it('Then I should have downloaded the default branch', () => {
           expect(md5(zipArchive)).to.equal(expectedDownloadMd5);
         });
 
@@ -85,7 +85,7 @@ describe('Github api test repositories', () => {
             expect(readme).containSubset(format);
           });
 
-          describe('When I dowload README.md file', () => {
+          describe('When I download README.md file', () => {
             const expectedReadmeMd5 = '0e62b07144b4fa997eedb864ff93e26b';
             let fileContent;
 
@@ -98,7 +98,7 @@ describe('Github api test repositories', () => {
               fileContent = readmeDownloadRespose.text;
             });
 
-            it('Then the README.md file should be download', () => {
+            it('Then the README.md file should be downloaded', () => {
               expect(md5(fileContent)).to.equal(expectedReadmeMd5);
             });
           });
