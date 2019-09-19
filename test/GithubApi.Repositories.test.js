@@ -7,7 +7,7 @@ const urlBase = 'https://api.github.com';
 describe('Github api test repositories', () => {
   const userName = 'aperdomob';
 
-  describe(`Wheng get ${userName} user`, async () => {
+  describe(`When I get the ${userName} user information`, () => {
     let user;
 
     before(async () => {
@@ -17,13 +17,13 @@ describe('Github api test repositories', () => {
       user = userResponse.body;
     });
 
-    it('then getted the user', () => {
+    it('Then I should get the expected information', () => {
       expect(user.name).to.equal('Alejandro Perdomo');
       expect(user.company).to.equal('PSL');
       expect(user.location).to.equal('Colombia');
     });
 
-    describe(`When get ${userName}'s repositories`, () => {
+    describe(`When I get ${userName}'s repository`, () => {
       let repositories;
       let repository;
       const repositoryNeeded = 'jasmine-awesome-report';
@@ -37,7 +37,7 @@ describe('Github api test repositories', () => {
         repository = repositories.find((repo) => repo.name === repositoryNeeded);
       });
 
-      it(`Then getted the ${repositoryNeeded} repository`, () => {
+      it(`Then I should get ${repositoryNeeded} repository`, () => {
         assert.exists(repository);
 
         expect(repository.full_name).to.equal(`${userName}/${repositoryNeeded}`);
@@ -45,7 +45,7 @@ describe('Github api test repositories', () => {
         expect(repository.description).to.equal('An awesome html report for Jasmine');
       });
 
-      describe('when donwload default branch', () => {
+      describe('When I download the default repository branch', () => {
         let zipArchive;
         const expectedDownloadMd5 = 'cb1d5ff786ef7e075c8cd67018ba7a74';
 
@@ -58,11 +58,11 @@ describe('Github api test repositories', () => {
           zipArchive = downloadRespose.text;
         });
 
-        it('then the file has been downloaded', () => {
+        it('Then I should download the default branch', () => {
           expect(md5(zipArchive)).to.equal(expectedDownloadMd5);
         });
 
-        describe('When get repository file list', () => {
+        describe('When I get repository file list', () => {
           const format = {
             name: 'README.md',
             path: 'README.md',
@@ -80,12 +80,12 @@ describe('Github api test repositories', () => {
             readme = filesList.find((file) => file.name === 'README.md');
           });
 
-          it('then shoul have README.md file', () => {
+          it('Then it should have README.md file', () => {
             assert.exists(readme);
             expect(readme).containSubset(format);
           });
 
-          describe('When dowload README.md file', () => {
+          describe('When I dowload README.md file', () => {
             const expectedReadmeMd5 = '0e62b07144b4fa997eedb864ff93e26b';
             let fileContent;
 
@@ -98,7 +98,7 @@ describe('Github api test repositories', () => {
               fileContent = readmeDownloadRespose.text;
             });
 
-            it('then should be downloaded README.md file', () => {
+            it('Then the README.md file should be download', () => {
               expect(md5(fileContent)).to.equal(expectedReadmeMd5);
             });
           });
