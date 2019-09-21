@@ -11,7 +11,7 @@ describe('Github api tes put request', () => {
     before(async () => {
       followResponse = await agent.put(`${baseUrl}/user/following/${userName}`)
         .set('User-Agent', 'agent')
-        .auth('toen', process.env.ACCESS_TOKEN);
+        .auth('token', process.env.ACCESS_TOKEN);
     });
     it(`Then I should follow to ${userName}`, () => {
       expect(followResponse.status).to.equal(statusCode.NO_CONTENT);
