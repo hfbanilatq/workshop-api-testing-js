@@ -56,7 +56,7 @@ describe('Given an authenticate user', () => {
         let modifiedIssue;
 
         before(async () => {
-          const issuePatchResponse = await agent.patch(`${baseUrl}/repos/${user.login}/${lastRepositoy.name}/issues/${issue.id}`, updateIssue)
+          const issuePatchResponse = await agent.patch(`${baseUrl}/repos/${user.login}/${lastRepositoy.name}/issues/${issue.number}`, updateIssue)
             .set('User-Agent', 'agent')
             .auth('token', process.env.ACCESS_TOKEN);
           modifiedIssue = issuePatchResponse.body;
