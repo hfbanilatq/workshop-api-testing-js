@@ -17,7 +17,7 @@ describe('When I get all users from github api', () => {
       }));
   });
 
-  it('Then the response time should be smaller than 5 seconds', () => expect(usersResponseTime).to.be.at.below(5000));
+  it('Then the response time should be smaller than 5 seconds', () => expect(usersResponseTime).to.be.below(5000));
   it('and it should contain thirty users by default pagination', () => expect(usersResponse.body.length).to.equal(30));
 
   describe('When I filter the number of users to 10', () => {
